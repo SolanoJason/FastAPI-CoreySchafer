@@ -1,0 +1,72 @@
+@import "tailwindcss";
+@source "../../templates";
+@source "../../static/js";
+
+@theme {
+}
+
+@layer base {
+	:root {
+		color-scheme: light;
+		--app-header-bg: #517b9c;
+		--app-header-text: #ffffff;
+		--app-bg-main: #f4f6f8;
+		--app-bg-surface: #ffffff;
+		--app-bg-surface-alt: #f8f9fa;
+		--app-border-color: #e5e7eb;
+		--app-border-subtle: #e9ecef;
+		--app-text-main: #111827;
+		--app-text-muted: #6c757d;
+		--app-link-accent: #3b82f6;
+		--app-hover-soft: rgba(81, 123, 156, 0.08);
+		--app-card-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+		--app-card-shadow-hover: 0 10px 26px rgba(15, 23, 42, 0.08);
+	}
+
+	html[data-theme="dark"],
+	html.dark {
+		color-scheme: dark;
+		--app-header-bg: #517b9c;
+		--app-header-text: #ffffff;
+		--app-bg-main: #1c1e21;
+		--app-bg-surface: #24272c;
+		--app-bg-surface-alt: #2a2b2e;
+		--app-border-color: #34383f;
+		--app-border-subtle: #33373e;
+		--app-text-main: #f3f4f6;
+		--app-text-muted: #9ca3af;
+		--app-link-accent: #6ca0dc;
+		--app-hover-soft: rgba(255, 255, 255, 0.06);
+		--app-card-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04);
+		--app-card-shadow-hover: 0 0 0 1px rgba(255, 255, 255, 0.08);
+	}
+
+	html[data-theme="auto"] {
+		color-scheme: light;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		html[data-theme="auto"] {
+			color-scheme: dark;
+			--app-header-bg: #517b9c;
+			--app-header-text: #ffffff;
+			--app-bg-main: #1c1e21;
+			--app-bg-surface: #24272c;
+			--app-bg-surface-alt: #2a2b2e;
+			--app-border-color: #34383f;
+			--app-border-subtle: #33373e;
+			--app-text-main: #f3f4f6;
+			--app-text-muted: #9ca3af;
+			--app-link-accent: #6ca0dc;
+			--app-hover-soft: rgba(255, 255, 255, 0.06);
+			--app-card-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04);
+			--app-card-shadow-hover: 0 0 0 1px rgba(255, 255, 255, 0.08);
+		}
+	}
+
+	body {
+		background: var(--app-bg-main);
+		color: var(--app-text-main);
+
+	}
+}

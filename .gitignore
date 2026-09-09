@@ -1,0 +1,20 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info/
+
+# Local configuration and secrets
+.env
+*.env
+
+# Frontend dependencies
+node_modules/
+
+# Notebook-generated files
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/

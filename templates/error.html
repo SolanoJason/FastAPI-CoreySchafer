@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+{% set error_code = status_code | default(500) %}
+{% set error_title = error_title | default("An unexpected error occurred.") %}
+{% set error_message = error_message | default("The request could not be completed at this time. Please try again in a moment.") %}
+{% set error_hint = error_hint | default("If this keeps happening, contact the site administrator or return to the home page.") %}
+{% set primary_action_label = primary_action_label | default("Go Home") %}
+{% set primary_action_href = primary_action_href | default("/") %}
+{% set secondary_action_label = secondary_action_label | default("Back to posts") %}
+{% set secondary_action_href = secondary_action_href | default("/posts") %}
+
+<section class="grid min-h-[calc(100vh-8rem)] place-items-center px-4 py-8 sm:px-6 lg:px-8" aria-labelledby="error-title">
+	<div class="grid w-full max-w-2xl gap-5 rounded-lg border border-[var(--app-border-color)] bg-[var(--app-bg-surface)] p-8 text-center shadow-sm sm:p-10">
+		<div class="text-5xl font-extrabold tracking-tight text-[var(--app-link-accent)] sm:text-6xl">{{ error_code }}</div>
+		<p class="text-xs font-bold uppercase tracking-[0.12em] text-[var(--app-text-muted)]">HTTP error</p>
+		<h1 id="error-title" class="text-3xl font-semibold tracking-tight text-(--app-text-main) sm:text-4xl">{{ error_title }}</h1>
+		<p class="mx-auto max-w-xl text-base leading-7 text-[var(--app-text-muted)]">{{ error_message }}</p>
+
+		<div class="flex flex-wrap justify-center gap-3 pt-1">
+			<a href="{{ primary_action_href }}" class="inline-flex items-center rounded-xl border border-[var(--app-border-color)] bg-[var(--app-text-main)] px-4 py-2.5 text-sm font-semibold text-[var(--app-bg-surface)] transition hover:bg-[var(--app-hover-soft)] hover:text-(--app-text-main)">{{ primary_action_label }}</a>
+			<a href="{{ secondary_action_href }}" class="inline-flex items-center rounded-xl border border-(--app-border-subtle) bg-[var(--app-bg-surface-alt)] px-4 py-2.5 text-sm font-semibold text-(--app-text-main) transition hover:border-[var(--app-border-color)] hover:bg-[var(--app-hover-soft)]">{{ secondary_action_label }}</a>
+		</div>
+
+		<div class="rounded-lg border border-(--app-border-subtle) bg-[var(--app-bg-surface-alt)] px-4 py-3 text-sm leading-6 text-[var(--app-text-muted)]">{{ error_hint }}</div>
+	</div>
+</section>
+{% endblock content %}
