@@ -59,7 +59,18 @@ class Settings(BaseSettings):
 
     STORAGE_DRIVER_CLASS: ClassVar[type[StorageDriver]]
 
+    # Declared here so the shared bootstrap settings can safely load a
+    # production dotenv file before selecting the concrete environment.
+    GCS_PROJECT: str | None = None
+    GCS_BUCKET: str | None = None
+    GCS_SERVICE_ACCOUNT_EMAIL: str | None = None
+    GCS_PRIVATE_KEY: SecretStr | None = None
+
     TEMPLATES_DIR: ClassVar[Path] = BASE_DIR / "templates"
+
+    SECRET_KEY: SecretStr = SecretStr("YOUR_SECRET_KEY")
+    ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: PositiveInt = 30
 
     @cached_property
     def templates(self) -> Jinja2Templates:
