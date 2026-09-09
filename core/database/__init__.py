@@ -6,3 +6,9 @@ from .mixins import TimeStampMixin
 def load_models():
     import apps.blog.models
     import apps.users.models
+
+
+# Register every mapped class whenever the database package is imported. The
+# relationship strings in individual model modules can then resolve without
+# requiring callers to remember a separate bootstrap call.
+load_models()

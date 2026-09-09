@@ -26,9 +26,7 @@ import apps.users.routers
 import time as time_module
 import threading
 from core.settings import settings
-from core.database import load_models, engine
-
-load_models()
+from core.database import engine
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
