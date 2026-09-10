@@ -8,7 +8,7 @@ from apps.users.models import User
 async def get_current_user(
     token: Annotated[str, Depends(oauth2_scheme)],
     session: SessionDep
-):
+) -> User:
     user_id = verify_access_token(token)
     if user_id is None:
         raise HTTPException(
@@ -16,4 +16,10 @@ async def get_current_user(
             detail="Invalid or expired token",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    session.get(User, user_id)
+    user = await session.get(User, user_id)
+    if user is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User not found",
+        )
+    return user

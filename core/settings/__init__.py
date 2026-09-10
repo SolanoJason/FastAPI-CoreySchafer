@@ -3,11 +3,11 @@ from .development import DevelopmentSettings
 from .production import ProductionSettings
 from .base import Settings
 
-base_settings = Settings() # type: ignore
+base_settings: Settings = Settings() # type: ignore
 
 if base_settings.ENVIRONMENT == Environment.PRODUCTION:
-    settings = ProductionSettings() # type: ignore
+    settings: ProductionSettings = ProductionSettings() # type: ignore
 else:
-    settings = DevelopmentSettings() # type: ignore
+    settings: DevelopmentSettings = DevelopmentSettings() # type: ignore
 
 __all__ = ["settings"]

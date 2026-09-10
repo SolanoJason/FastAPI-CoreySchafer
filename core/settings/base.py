@@ -18,6 +18,7 @@ from typing import Literal, Annotated, ClassVar, get_type_hints, get_origin
 from urllib.parse import urlencode
 from sqlalchemy.engine.interfaces import IsolationLevel
 from libcloud.storage.base import StorageDriver
+from libcloud.storage.providers import Provider
 from libcloud.storage.drivers.local import LocalStorageDriver
 from .utils import Environment, SSLMode
 
@@ -26,7 +27,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
-        extra="forbid",
+        extra="ignore",
         frozen=True,
         case_sensitive=True,
         env_ignore_empty=True,
@@ -57,14 +58,7 @@ class Settings(BaseSettings):
     DB__ENGINE__POOLSIZE: NonNegativeInt = 5
     DB__ENGINE__POOLOVERFLOW: Annotated[int, Field(ge=-1)] = 10
 
-    STORAGE_DRIVER_CLASS: ClassVar[type[StorageDriver]]
-
-    # Declared here so the shared bootstrap settings can safely load a
-    # production dotenv file before selecting the concrete environment.
-    GCS_PROJECT: str | None = None
-    GCS_BUCKET: str | None = None
-    GCS_SERVICE_ACCOUNT_EMAIL: str | None = None
-    GCS_PRIVATE_KEY: SecretStr | None = None
+    STORAGE_PROVIDER: ClassVar[Provider]
 
     TEMPLATES_DIR: ClassVar[Path] = BASE_DIR / "templates"
 
